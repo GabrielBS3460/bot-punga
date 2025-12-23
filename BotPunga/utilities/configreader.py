@@ -15,8 +15,19 @@ class ConfigReader:
 
     @staticmethod
     def get_token():
+        token = os.getenv("DISCORD_TOKEN")
+        if token:
+            return token
+
         file_name = 'dev.env' if ConfigReader.dev_mode else 'prod.env'
-        env_file = os.path.join(os.path.dirname(__file__), '..', 'project', 'settings', file_name)
+        env_file = os.path.join(
+            os.path.dirname(__file__),
+            '..',
+            'project',
+            'settings',
+            file_name
+        )
+
         load_dotenv(env_file)
         return os.getenv("TOKEN")
     
